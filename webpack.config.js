@@ -40,6 +40,9 @@ const config = {
     ]
   },
   plugins: [
+    // Whenever you work with libraries that are dependent on the use of a global variable, 
+    // ..just like jQuery is with $ and jQuery, you must tell webpack to make exceptions
+    // .. for these variables by using webpack.ProvidePlugin
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
