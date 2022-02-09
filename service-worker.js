@@ -35,8 +35,12 @@ self.addEventListener('fetch', function (e) {
 })
 
 // Cache resources
+// install service worker 
 self.addEventListener('install', function (e) {
+  // ensures that the service worker doesnt move on from installin g phase until it s 
+  // ..executed all of its code 
   e.waitUntil(
+    // find specific cache by name, then add every file in the files to cache array to cache
     caches.open(CACHE_NAME).then(function (cache) {
       console.log('installing cache : ' + CACHE_NAME)
       return cache.addAll(FILES_TO_CACHE)
@@ -47,6 +51,7 @@ self.addEventListener('install', function (e) {
 // Delete outdated caches
 self.addEventListener('activate', function (e) {
   e.waitUntil(
+    // .keys returns an array of all cache names to Keylist
     caches.keys().then(function (keyList) {
       // `keyList` contains all cache names under your username.github.io
       // filter out ones that has this app prefix to create keeplist

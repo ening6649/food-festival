@@ -232,10 +232,13 @@
       </div>
     </footer>
   </body>
+  <!-- tells the brower we are using a service worker  -->
   <script type="text/javascript">
     (function() {
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
+        // does not need to add a script tag to include 
+        // this does the same 
           .register("./service-worker.js")
           .then(() => console.log("Service Worker registered successfully."))
           .catch(error =>

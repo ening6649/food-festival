@@ -12,6 +12,8 @@ const config = {
     tickets: './assets/js/tickets.js'
   },
   output: {
+    // the name of each attribute in the entry object will be used 
+    // ..in place of [name]
     filename: '[name].bundle.js',
     path: `${__dirname}/dist`
   },
@@ -21,8 +23,10 @@ const config = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
+            // only emit images without reducing the size 
             loader: 'file-loader',
             options: {
+              // always include the following
               esModule: false,
               name(file) {
                 return '[path][name].[ext]';
@@ -33,6 +37,7 @@ const config = {
             }
           },
           {
+            // image size reducer 
             loader: 'image-webpack-loader'
           }
         ]
@@ -47,6 +52,8 @@ const config = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
+    // output an HTML file called report.html in dist folder
+    // when set to disable , will stop reporting
     new BundleAnalyzerPlugin({
       analyzerMode: 'static'
     }),
@@ -57,6 +64,7 @@ const config = {
       start_url: '../index.html',
       background_color: '#01579b',
       theme_color: '#ffffff',
+      // fingerprints and inject are both specific to the manifest plugin
       fingerprints: false,
       inject: false,
       icons: [
